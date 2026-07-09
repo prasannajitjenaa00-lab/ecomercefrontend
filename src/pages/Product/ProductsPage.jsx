@@ -147,7 +147,7 @@ export default function ProductsPage() {
                   </div>
                 ))}
               </div>
-            ) : products.length === 0 ? (
+            ) : (products?.length || 0) === 0 ? (
               <div className="text-center py-24">
                 <p className="font-display text-3xl text-dark-300 dark:text-dark-600 mb-4">No products found</p>
                 <p className="font-body text-stone-400">Try adjusting your filters</p>
@@ -156,7 +156,7 @@ export default function ProductsPage() {
             ) : (
               <>
                 <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-                  {products.map(product => (
+                  {products?.map(product => (
                     <motion.div key={product._id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
                       <ProductCard product={product} />
                     </motion.div>
