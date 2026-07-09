@@ -52,9 +52,11 @@ export default function ProductCard({ product, dark = false }) {
       <div className={`rounded-xl overflow-hidden ${dark ? 'bg-dark-800' : 'bg-white dark:bg-dark-900'} border border-stone-100 dark:border-dark-800`}>
         {/* Image Container */}
         <div className="relative overflow-hidden aspect-[3/4] bg-stone-100 dark:bg-dark-800">
-          <img src={mainImage} alt={product.name}
+          <img src={mainImage} alt={product.name} data-src={mainImage}
+            onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = 'https://via.placeholder.com/400x500/1a1a1a/d4af37?text=No+Image'; console.warn('Product image failed to load:', e.currentTarget.dataset.src, 'product:', product._id); }}
             className="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 absolute inset-0" />
-          <img src={hoverImage} alt={product.name}
+          <img src={hoverImage} alt={product.name} data-src={hoverImage}
+            onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = 'https://via.placeholder.com/400x500/1a1a1a/d4af37?text=No+Image'; }}
             className="w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100 absolute inset-0" />
 
           {/* Badges */}
