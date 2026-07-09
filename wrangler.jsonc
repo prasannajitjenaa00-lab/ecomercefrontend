@@ -1,0 +1,6 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/src/config-schema.json",
+  "name": "ecomercefrontend",
+  "pages_build_output_dir": "./build",
+  "compatibility_date": "2025-07-09"
+}
