@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade, Navigation } from 'swiper/modules';
-import 'swiper/css'; 'swiper/css/effect-fade'; 'swiper/css/pagination'; 'swiper/css/navigation';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import { FiArrowRight, FiTruck, FiRefreshCw, FiShield, FiHeadphones } from 'react-icons/fi';
 import { HiOutlineSparkles } from 'react-icons/hi';
 import api from '../../utils/api';
@@ -45,9 +48,9 @@ export default function HomePage() {
           api.get('/products?isBestSeller=true&limit=8'),
           api.get('/products?isFlashSale=true&limit=6'),
         ]);
-        setNewArrivals(na.data.products);
-        setTrending(tr.data.products);
-        setFlashSale(fs.data.products);
+        setNewArrivals(na?.data?.products || []);
+        setTrending(tr?.data?.products || []);
+        setFlashSale(fs?.data?.products || []);
       } catch (err) {
         console.warn('Backend offline, loading mock products on homepage.');
         setNewArrivals(MOCK_PRODUCTS.filter(p => p.isNewArrival).slice(0, 8));
@@ -237,7 +240,7 @@ export default function HomePage() {
   );
 }
 
-function ProductSection({ title, subtitle, products, link, loading, dark = false }) {
+function ProductSection({ title, subtitle, products = [], link, loading, dark = false }) {
   return (
     <section className={`py-20 ${dark ? 'bg-stone-100 dark:bg-dark-900' : 'bg-white dark:bg-dark-950'}`}>
       <div className="container mx-auto px-4 lg:px-8">
@@ -256,7 +259,7 @@ function ProductSection({ title, subtitle, products, link, loading, dark = false
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-            {products.map((product, i) => (
+            {products?.map((product, i) => (
               <motion.div key={product._id} custom={i % 4} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                 <ProductCard product={product} />
               </motion.div>
