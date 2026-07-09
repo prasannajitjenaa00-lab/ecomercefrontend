@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "buildOutputDirectory": "build",
+  "routes": [
+    {
+      "pattern": "/*",
+      "script": null
+    }
+  ]
+}
