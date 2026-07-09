@@ -52,3 +52,12 @@ export const orderStatusColor = (status) => ({
   cancelled: 'text-red-600 bg-red-50',
   refunded: 'text-gray-600 bg-gray-50',
 }[status] || 'text-gray-600 bg-gray-50');
+
+// Resolve image URLs to absolute paths. If `url` is already absolute, return as-is.
+export const resolveImage = (url) => {
+  const placeholder = 'https://via.placeholder.com/400x500/1a1a1a/d4af37?text=No+Image';
+  if (!url) return placeholder;
+  if (/^https?:\/\//i.test(url)) return url;
+  const base = (process.env.REACT_APP_API_URL || window.location.origin).replace(/\/$/, '');
+  return `${base}${url.startsWith('/') ? '' : '/'}${url}`;
+};

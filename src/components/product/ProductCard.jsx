@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { FiHeart, FiShoppingBag, FiStar, FiEye } from 'react-icons/fi';
 import { addToCart } from '../../store/slices/cartSlice';
 import { toggleItem } from '../../store/slices/wishlistSlice';
-import { formatCurrency } from '../../utils/helpers';
+import { formatCurrency, resolveImage } from '../../utils/helpers';
 import api from '../../utils/api';
 import { toast } from 'react-toastify';
 
@@ -22,8 +22,8 @@ export default function ProductCard({ product, dark = false }) {
     ? Math.round(product.price - (product.price * product.discount) / 100)
     : product.price;
 
-  const mainImage = product.images?.[0]?.url || 'https://via.placeholder.com/400x500/1a1a1a/d4af37?text=No+Image';
-  const hoverImage = product.images?.[1]?.url || mainImage;
+  const mainImage = resolveImage(product.images?.[0]?.url);
+  const hoverImage = resolveImage(product.images?.[1]?.url || product.images?.[0]?.url);
 
   const handleWishlist = async (e) => {
     e.preventDefault();
